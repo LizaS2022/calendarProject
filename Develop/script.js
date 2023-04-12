@@ -66,19 +66,19 @@ $(function () {
 
  
 
-  // if (currentHour === currentTimeBlockId) {
-  //   newDiv.addClass("present");
-  //   console.log("the current hour is: " +currentHour);
-  //   console.log("the current time is: " + currentTimeBlockId)
-  // }
+  if (currentHour === currentTimeBlockId) {
+    newDiv.addClass("present");
+    console.log("the current hour is: " +currentHour);
+    console.log("the current time is: " + currentTimeBlockId)
+  }
 
-  // else if (currentHour < currentTimeBlockId) {
-  //   newDiv.addClass("future");
-  // }
+  else if (currentHour < currentTimeBlockId) {
+    newDiv.addClass("future");
+  }
 
-  // else {
-  //   newDiv.addClass("past");
-  // }
+  else {
+    newDiv.addClass("past");
+  }
 
   
   // TODO: Add code to get any user input that was saved in localStorage and set
