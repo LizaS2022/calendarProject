@@ -11,8 +11,8 @@ This app has the following features:
 
 Links
 
-URL od the deployed
+[URL of the deployed](https://lizas2022.github.io/calendarProject/).
 
-URL of the GitHub repository.
+[URL of the GitHub repository.](https://github.com/LizaS2022/calendarProject.git)
 
 Usage
