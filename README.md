@@ -16,3 +16,7 @@ Links
 [URL of the GitHub repository.](https://github.com/LizaS2022/calendarProject.git)
 
 Usage
+
+The webpage is optimized and can be viewed on various screens and devices.
+
+![1681391074380](image/README/1681391074380.png)
