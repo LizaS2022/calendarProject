@@ -3,14 +3,11 @@
 // in the html.
 
 var mainDivEl = $("#main-div");
-
 var amount = 24;
 for (var i = 1; i < 25; i++){
-    var newDiv = $("<div>").addClass("row time-block future").attr("id",i);
+    var newDiv = $("<div>").addClass("row time-block").attr("id",i);
     mainDivEl.append(newDiv);
-    console.log("This is repeat " + i);
-    console.log(newDiv);
-    var innerDiv = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").attr("id",i +"");
+    var innerDiv = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").attr("id","hour" +i);
     
     if (i >= 12 && i < 24){
       innerDiv.html(i +"PM");
@@ -20,7 +17,8 @@ for (var i = 1; i < 25; i++){
     }
 
     newDiv.append(innerDiv);
-    var textAreaEl = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", "3");
+    var textAreaEl = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", "3").attr("id","inputTime" + i);
+   
     newDiv.append(textAreaEl);
 
     var buttonEl = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save");
@@ -29,6 +27,7 @@ for (var i = 1; i < 25; i++){
     var ilEl = $("<il>").addClass("fas fa-save").attr("aria-hidden", "true");
   
     buttonEl.append(ilEl);
+
 
   }
 
@@ -46,9 +45,11 @@ $(function () {
     console.log($(this).parent().attr("id"));
     var hourClicked = $(this).parent().attr("id");
     var descriptionEl = $(this).siblings(".description").val();
-    console.log(descriptionEl);
+    
     var storeMessage = localStorage.setItem(hourClicked, descriptionEl);
     console.log(storeMessage);
+    
+    
   })
    
 
@@ -60,30 +61,53 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  var currentHour = dayjs().hour();
-  var currentTimeBlockId = newDiv.id.value;
-  console.log(currentTimeBlockId);
 
- 
+  function dynamicHour() {
+    var currentHour =  dayjs().hour() +1;
 
-  if (currentHour === currentTimeBlockId) {
-    newDiv.addClass("present");
-    console.log("the current hour is: " +currentHour);
-    console.log("the current time is: " + currentTimeBlockId)
-  }
-
-  else if (currentHour < currentTimeBlockId) {
-    newDiv.addClass("future");
-  }
-
-  else {
-    newDiv.addClass("past");
-  }
-
+    $("#inputTime"+currentHour).addClass("present").removeClass("past future");
+   
   
+    console.log(currentHour);
+    
+
+    for (var i = 1; i < currentHour; i++) {
+      $("#inputTime"+i).addClass("past").removeClass("present future");;
+
+    } 
+    
+    for (var i = currentHour+1; i <= 24; i++) {
+      $("#inputTime"+i).addClass("future").removeClass("past present");
+     
+     
+    } 
+  }
+  
+  setInterval(dynamicHour 
+    ,1000);
+
+    dynamicHour();
+  
+    
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+  
+  for (var i =1; i <25; i++){
+    var getValue = localStorage.getItem(i);
+
+    if (getValue != null) {
+      $("#inputTime" +i).text(getValue.value);
+    }
+  }
+ 
+
+
+
+
   // TODO: Add code to display the current date in the header of the page.
+  var todaysDate = dayjs().format('dddd, MMMM D, YYYY');
+  var dateEl = $("#currentDay");
+  dateEl.text(todaysDate);
 });
