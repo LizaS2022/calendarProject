@@ -42,7 +42,7 @@ $(function () {
    
 
   function dynamicHour() {
-    var currentHour =  dayjs().hour() +1;
+    var currentHour =  dayjs().hour();
 
     $("#inputTime"+currentHour).addClass("present").removeClass("past future");
    
